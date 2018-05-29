@@ -1,6 +1,0 @@
-projectKey=transaction_service
-serverUrl=http://localhost:9000
-serverVersion=7.1.0.11001
-dashboardUrl=http://localhost:9000/dashboard/index/transaction_service
-ceTaskId=AWOrTn1FjhZFfPCMXWRO
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AWOrTn1FjhZFfPCMXWRO
