@@ -39,7 +39,7 @@ class FetchRawTransactions implements FetchRawTransactionsInterface
      * @param TransactionEventDispatcherInterface        $transactionEventDispatcher
      * @param TransactionCreatedEventCollectionInterface $transactionCreatedEventCollection
      */
-    public function __construct(
+    public function __construct
         ClientInterface $sqsClient,
         TransactionEventDispatcherInterface $transactionEventDispatcher,
         TransactionCreatedEventCollectionInterface $transactionCreatedEventCollection
