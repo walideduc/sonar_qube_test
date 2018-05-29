@@ -1,0 +1,17 @@
+version: "3.2"
+services:
+  php-fpm:
+    build:
+      context: ./../../application
+      dockerfile: ./infrastructure/docker/php-fpm/Dockerfile
+    image: "${DOCKER_REGISTRY}/tsi-php-fpm-transaction-service:${RELEASE_VERSION}"
+  nginx:
+    build:
+      context: ./../../application
+      dockerfile: ./infrastructure/docker/nginx/Dockerfile
+    image: "${DOCKER_REGISTRY}/tsi-nginx-transaction-service:${RELEASE_VERSION}"
+  transaction-worker:
+    build:
+      context: ./../../application
+      dockerfile: ./infrastructure/docker/transaction-worker/Dockerfile
+    image: "${DOCKER_REGISTRY}/tsi-worker-transaction-service:${RELEASE_VERSION}"

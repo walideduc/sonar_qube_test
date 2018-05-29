@@ -1,0 +1,425 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Transaction service",
+    "version": "1.0.0",
+    "title": "Transaction service"
+  },
+  "basePath": "/api",
+  "tags" : [ {
+    "name" : "rqms",
+    "description" : "Risk Quality Management Service",
+    "externalDocs" : {
+      "description" : "Risk Quality Management Service",
+      "url" : "http://swagger.io"
+    }
+  } ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/rqms/statistics/tp-online/customers/v1/{email}/period/{minutes}": {
+      "get": {
+        "tags" : [ "rqms" ],
+        "summary": "generate transaction statistics for a given user",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "Customer email",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "minutes",
+            "in": "path",
+            "description": "Period in minutes",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user transaction statistics",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomerTransactionStatistics"
+              }
+            }
+          },
+          "404": {
+            "description": "item not found"
+          }
+        }
+      }
+    },
+    "/rqms/statistics/outlets/v1/{outletId}/period/{minutes}": {
+      "get": {
+        "tags" : [ "rqms" ],
+        "summary": "generate transaction statistics for a given outlet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "outletId",
+            "in": "path",
+            "description": "Outlet id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "minutes",
+            "in": "path",
+            "description": "Period in minutes",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "outlet transaction statistics",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OutletTransactionStatistics"
+              }
+            }
+          },
+          "404": {
+            "description": "item not found"
+          }
+        }
+      }
+    },
+    "/rqms/statistics/italy-outlets/v1/{outletId}/period/{minutes}": {
+      "get": {
+        "tags" : [ "rqms" ],
+        "summary": "generate transaction statistics for a given outlet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "outletId",
+            "in": "path",
+            "description": "Outlet id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "minutes",
+            "in": "path",
+            "description": "Period in minutes",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "outlet transaction statistics",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OutletTransactionStatistics"
+              }
+            }
+          },
+          "404": {
+            "description": "item not found"
+          }
+        }
+      }
+    },
+
+    "/rqms/statistics/search/v1/query/": {
+      "get": {
+        "tags" : [ "rqms" ],
+        "summary": "search for transactions from given query filter",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "reference",
+            "in": "query",
+            "description": "Reference of the transaction",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "description": "Exact amount of the transaction",
+            "required": false,
+            "type": "int"
+          },
+          {
+            "name": "minAmount",
+            "in": "query",
+            "description": "Minimum amount of the transaction",
+            "required": false,
+            "type": "int"
+          },
+          {
+            "name": "maxAmount",
+            "in": "query",
+            "description": "Maximum amount of the transaction",
+            "required": false,
+            "type": "int"
+          },
+          {
+            "name": "productId",
+            "in": "query",
+            "description": "Id of the product",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Transaction status. Ex: created",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "customerId",
+            "in": "query",
+            "description": "Transaction's customer Id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Transaction date formatted YYYY-mm-dd",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "afterDate",
+            "in": "query",
+            "description": "Transaction minimum date, YYYY-mm-dd",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "beforeDate",
+            "in": "query",
+            "description": "Transaction maximum date, YYYY-mm-dd",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for paginated results, starting at 0",
+            "required": false,
+            "type": "int"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Number of result per page for paginated results. Default: 100",
+            "required": false,
+            "type": "int"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction statistics search result",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SearchTransactionStatistics"
+              }
+            }
+          },
+          "404": {
+            "description": "item not found"
+          }
+        }
+      }
+    },
+    "/rqms/statistics/search/v1/subset/": {
+      "post": {
+        "tags" : [ "rqms" ],
+        "summary": "search for transactions from given ids or references",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "Json formatted list of Ids to search for",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction statistics search result",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SearchTransactionStatistics"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rqms/statistics/transaction/v1/update/{reference}": {
+      "put": {
+        "tags" : [ "rqms" ],
+        "summary": "Update transaction with given reference",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "reference",
+            "in": "path",
+            "description": "reference of transaction to update",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributes",
+            "in": "body",
+            "description": "attributes to update to the given transaction reference. \r\nEx: {\"uuid\": \"5c520c4e-ea30-4078-8626-7634deda1a00\"}",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction is updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Transaction not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CustomerTransactionStatistics": {
+      "type": "object",
+      "required": [
+        "amount",
+        "currency",
+        "email",
+        "period"
+      ],
+      "properties": {
+        "amount": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "OutletTransactionStatistics": {
+      "type": "object",
+      "required": [
+        "amount",
+        "currency",
+        "outlet_id",
+        "period"
+      ],
+      "properties": {
+        "amount": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "outlet_id": {
+          "type": "string"
+        },
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "SearchTransactionStatistics": {
+      "type": "object",
+      "required": [
+        "id",
+        "reference",
+        "amount",
+        "currency",
+        "customer",
+        "dt_creation",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "reference": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "customer": {
+          "type": "object",
+          "required": [
+            "email",
+            "id",
+            "origin"
+          ],
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "origin": {
+              "type": "string"
+            }
+          }
+        },
+        "dt_creation": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "transactionUpdate": {
+      "properties": {
+        "reference": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

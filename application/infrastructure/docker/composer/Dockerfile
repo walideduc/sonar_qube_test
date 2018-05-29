@@ -1,0 +1,1 @@
+FROM registry.tsipayment.net/composer:1.0.0

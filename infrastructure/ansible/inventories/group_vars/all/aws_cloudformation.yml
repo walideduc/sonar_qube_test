@@ -1,0 +1,13 @@
+---
+
+aws_region: "{{ aws_sqs_region }}"
+aws_cf_template_path: "{{ project_root_path }}/infrastructure/aws/cloudformation/stack/template.json"
+aws_cf_app_config_key_mappings:
+  aws_sqs_queue:
+    config_file_path: "{{ project_root_path }}/application/.env"
+    config_key_name: AWS_SQS_QUEUE
+    aws_resource_output_name: TransactionServiceQueueURL
+  aws_sns_consolidated_transaction_topic:
+    config_file_path: "{{ project_root_path }}/application/.env"
+    config_key_name: AWS_SNS_TOPIC
+    aws_resource_output_name: ConsolidatedTransactionsTopicURL

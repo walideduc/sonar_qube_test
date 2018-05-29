@@ -1,0 +1,2 @@
+export http_proxy=http://prd-ecr-proxy.tsi:3128
+export https_proxy=http://prd-ecr-proxy.tsi:3128

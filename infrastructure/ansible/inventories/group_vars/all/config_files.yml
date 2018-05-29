@@ -1,0 +1,13 @@
+---
+
+generate_config_file: true
+config_files:
+  application_ini:
+    template: "application/.env.j2"
+    dest: "application/.env"
+  transaction_worker_etc_environment_file:
+    template: "application/infrastructure/docker/transaction-worker/etc/environment.j2"
+    dest: "application/infrastructure/docker/transaction-worker/etc/environment"
+  aws_cloud_formation_template:
+      template: "infrastructure/aws/cloudformation/stack/template.json.j2"
+      dest: "infrastructure/aws/cloudformation/stack/template.json"

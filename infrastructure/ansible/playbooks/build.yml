@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  connection: local
+  gather_facts: no
+
+  roles:
+    - tsi.generate-config-files
+    - tsi.docker.build

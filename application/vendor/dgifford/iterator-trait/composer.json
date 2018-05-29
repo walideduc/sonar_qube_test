@@ -1,0 +1,33 @@
+{
+	"name": "dgifford/iterator-trait",
+
+	"license"	: "GPL-3.0",
+
+	"description": "Trait providing methods implementing the Iterator interface.",
+
+	"keywords":
+	[
+		"php", "trait", "array", "interface", "iterator interface"
+	],
+
+	"require":
+	{
+		"php": ">=5.4"
+	},
+
+	"authors"	:
+	[
+		{
+			"name"		: "Dan Gifford",
+			"email"		: "dan@dancoded.com",
+			"homepage"	: "http://dancoded.com",
+			"role"		: "Developer"
+		}
+	],
+
+	"autoload":
+	{
+		"psr-4": {"dgifford\\Traits\\": "src/"}
+	}
+
+}

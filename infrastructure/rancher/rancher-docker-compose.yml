@@ -1,0 +1,8 @@
+version: '2'
+services:
+  php-fpm:
+    image: "${DOCKER_REGISTRY}/tsi-php-fpm-transaction-service:${RELEASE_VERSION}"
+  nginx:
+    image: "${DOCKER_REGISTRY}/tsi-nginx-transaction-service:${RELEASE_VERSION}"
+  transaction-worker:
+    image: "${DOCKER_REGISTRY}/tsi-worker-transaction-service:${RELEASE_VERSION}"

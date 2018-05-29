@@ -1,0 +1,24 @@
+{
+  "title": "BasicValidatorSchema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Identifier"
+    },
+    "amount": {
+      "type": "string",
+      "description": "Float amount"
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO Code"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "amount",
+    "currency"
+  ]
+}

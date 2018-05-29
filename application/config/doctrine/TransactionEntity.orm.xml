@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Domain\Transaction\Entity\TransactionEntity"
+            table="transaction"
+            repository-class="App\Domain\Transaction\Repository\TransactionRepository">
+        <id name="transaction_id" type="string" />
+        <field name="amount" length="32" />
+        <field name="currency" length="32" />
+        <field name="status" length="32" />
+        <field name="transaction_date" length="32" />
+        <field name="card" length="32" />
+        <field name="is3ds" length="32" />
+        <field name="reference" length="32" />
+        <field name="type" length="32" />
+        <field name="merchant_id" type="integer" />
+        <field name="customer_ip" length="32" />
+        <field name="customer_id" length="32" />
+        <field name="owneremail" length="32" />
+        <field name="ownerfname" length="32" />
+        <field name="ownerlname" length="32" />
+        <field name="ownerzip" length="32" />
+        <field name="ownerip" length="32" />
+    </entity>
+</doctrine-mapping>

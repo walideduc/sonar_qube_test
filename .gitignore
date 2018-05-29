@@ -1,0 +1,5 @@
+.idea/
+.DS_Store
+*.retry
+var/cache/*
+var/log/*

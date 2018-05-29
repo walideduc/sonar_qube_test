@@ -1,0 +1,104 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "create the transaction service aws stack",
+  "Parameters": {
+  },
+  "Resources": {
+    "TransactionServiceQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": "{{ aws_sqs_queue_name }}"
+      }
+    },
+    "ConsolidatedTransactionsTopic": {
+      "Type": "AWS::SNS::Topic",
+      "Properties": {
+        "TopicName": "{{ aws_consolidated_sns_topic_name }}",
+        "DisplayName": "{{ aws_consolidated_sns_topic_name }}"
+      }
+    },
+    "RawTransactionsTopic": {
+      "Type": "AWS::SNS::Topic",
+      "Properties": {
+        "TopicName": "{{ aws_raw_sns_topic_name }}",
+        "DisplayName": "{{ aws_raw_sns_topic_name }}",
+        "Subscription": [
+          {
+            "Endpoint": {
+              "Fn::GetAtt": [
+                "TransactionServiceQueue",
+                "Arn"
+              ]
+            },
+            "Protocol": "sqs"
+          }
+        ]
+      }
+    },
+    "TransactionServiceQueuePolicy": {
+      "Type": "AWS::SQS::QueuePolicy",
+      "Properties": {
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Id": "TransactionServiceQueuePolicy",
+          "Statement": [
+            {
+              "Sid": "Allow-SendMessage-To-TransactionServiceQueue-From-RawTransactionsTopic",
+              "Effect": "Allow",
+              "Principal": "*",
+              "Action": [
+                "sqs:SendMessage"
+              ],
+              "Resource": "*",
+              "Condition": {
+                "ArnEquals": {
+                  "aws:SourceArn": {
+                    "Ref": "RawTransactionsTopic"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "Queues": [
+          {
+            "Ref": "TransactionServiceQueue"
+          }
+        ]
+      }
+    }
+  },
+  "Outputs": {
+    "TransactionServiceQueueURL": {
+      "Description": "URL of newly created SQS Queue",
+      "Value": {
+        "Ref": "TransactionServiceQueue"
+      }
+    },
+    "ConsolidatedTransactionsTopicURL": {
+      "Description": "URL of newly created Consolidated transactions SNS TOPIC",
+      "Value": {
+        "Ref": "ConsolidatedTransactionsTopic"
+      },
+      "Export": {
+        "Name": {
+          "Fn::Join": [
+            ":",
+            [
+              {
+                "Ref": "AWS::StackName"
+              },
+              "ConsolidatedTransactionsTopic"
+            ]
+          ]
+        }
+      }
+    },
+    "RawTransactionsTopicURL": {
+      "Description": "URL of newly created Raw transactions SNS TOPIC",
+      "Value": {
+        "Ref": "RawTransactionsTopic"
+      }
+    }
+  }
+}

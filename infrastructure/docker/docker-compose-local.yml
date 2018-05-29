@@ -1,0 +1,43 @@
+version: "3.2"
+services:
+  php-fpm:
+    build:
+      context: ./../../application
+      dockerfile: ./infrastructure/docker/php-fpm/Dockerfile
+    volumes:
+      - type: bind
+        source: ./../../application
+        target: /var/www/html
+  nginx:
+    build:
+      context: ./../../application
+      dockerfile: ./infrastructure/docker/nginx/Dockerfile
+    volumes:
+      - type: bind
+        source: ./../../application
+        target: /var/www/html
+    ports:
+      - "8082:80"
+
+  transaction-worker:
+    build:
+      context: ./../../application
+      dockerfile: ./infrastructure/docker/transaction-worker/Dockerfile
+    volumes:
+      - type: bind
+        source: ./../../application
+        target: /var/www/html
+    entrypoint:
+      - bin/console
+      - tsi:transactions
+
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+
+  mongoclient:
+    image: mongoclient/mongoclient:latest
+    ports:
+      - "3000:3000"
