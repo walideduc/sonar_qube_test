@@ -33,16 +33,7 @@ class IndexController extends AbstractController
     ){
         try{
             $outletStatisticEntity = $this->outletStatisticService->totalAmountPerOutletForPeriod($outletId,$minutes);
-            return new JsonResponse(
-                [
-                    'data' =>
-                        [
-                            'amount' => $outletStatisticEntity->getAmount(),
-                            'currency' => $outletStatisticEntity->getCurrency(),
-                            'outlet_id' => $outletStatisticEntity->getOutletId(),
-                            'period' => $outletStatisticEntity->getPeriodInMinutes()
-                        ]
-                ]
+            return new JsonRes
             );
         }catch (OutletNotFoundException $outletNotFoundException){
             return new JsonResponse(
