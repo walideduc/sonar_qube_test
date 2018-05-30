@@ -63,10 +63,10 @@ class FetchRawTransactions implements FetchRawTransactionsInterface
              * @var $message SqsMessage
              */
             $event = $this
-                ->transactionEventDispatcher
-                ->dispatch(
+                ->transa
                     TransactionCreatedEvent::NAME,
-                    new TransactionCreatedEvent($message)
+                    new TransactionCrctionEventDispatcher
+                ->dispatch(eatedEvent($message)
                 );
 
             /**
