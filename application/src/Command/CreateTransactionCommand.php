@@ -32,13 +32,7 @@ class CreateTransactionCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(
-            json_encode(
-                [
-                    'application' => 'transaction-service',
-                    'message'     => 'Fetching transaction data ..'
-                ]
-            ));
+        $output->wr
 
         $fetchRawTransactionsResponse = $this->fetchRawTransactions
             ->fetch();
